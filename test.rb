@@ -1,15 +1,14 @@
+require 'nokogiri'
 require 'open-uri'
 require 'pry'
 
-class Scraper
 
-  def self.scrape_index_page(index_url)
+  def scrape_index_page(index_url)
     scraped_students=[]
     html = File.read('fixtures/student-site/index.html')#html = open(index_url)
      scrapped = Nokogiri::HTML(html)
       array=scrapped.css("div.roster-cards-container")
       array.each do |student_card|
-
         student_card.css(".student-card a").each do |e|
           student={}
           name=e.css(".student-name").text
@@ -27,10 +26,8 @@ class Scraper
 
   end
 
-  def self.scrape_profile_page(profile_url)
+  def scrape_profile_page(profile_url)
     profile={}
-    arr=profile_url.split("4000/")
-    profile_url=arr[1]
     html = File.read(profile_url)#html = open(index_url)
      scrapped = Nokogiri::HTML(html)
       array=scrapped.css("div.social-icon-container a")
@@ -47,16 +44,10 @@ class Scraper
             profile[:blog]=e.attribute("href").value
           end
        end
-       quote=scrapped.css(".profile-quote").text
-       profile[:profile_quote]=quote
-       bio=scrapped.css(".description-holder p").text
-       profile[:bio]=bio
-
        return profile
   end
 
-end
-
+description-holder
 #div.student-card
 #.arr(id) .val
-#Scraper.scrape_index_page("./fixtures/student-site/index.html").inspect
+puts scrape_index_page("./fixtures/student-site/index.html").inspect
