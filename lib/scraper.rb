@@ -5,7 +5,7 @@ class Scraper
 
   def self.scrape_index_page(index_url)
      scraped_students=[]
-     html = open("fixtures/student-site/index.html")              #File.read('fixtures/student-site/index.html')
+     html = open("fixtures/student-site/index.html")
       scrapped = Nokogiri::HTML(html)
        array=scrapped.css("div.roster-cards-container")
        array.each do |student_card|
@@ -15,9 +15,9 @@ class Scraper
            name=e.css(".student-name").text
            location=e.css(".student-location").text
            profile_url =e.attribute("href").value
-           student[:name]=name
-           student[:location]=location
-           student[:profile_url ]="http://127.0.0.1:4000/"+profile_url
+           student[:name] = name
+           student[:location] = location
+           student[:profile_url ] = "http://127.0.0.1:4000/#{profile_url}"
            scraped_students.push(student)
        end
        end
