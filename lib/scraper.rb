@@ -28,7 +28,7 @@ class Scraper
      profile={}
      arr=profile_url.split("4000/")
      profile_url=arr[1]
-     html = File.read(profile_url)
+     html = open("#{profile_url}")
       scrapped = Nokogiri::HTML(html)
        array=scrapped.css("div.social-icon-container a")
         array.each do |e|
